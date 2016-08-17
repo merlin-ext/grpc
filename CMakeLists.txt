@@ -65,12 +65,19 @@ if(NOT protobuf_BUILD_TESTS)
   set(protobuf_BUILD_TESTS OFF CACHE BOOL "Build protobuf tests")
 endif()
 
+if (MSVC)
+  add_definitions( -D_WIN32_WINNT=0x600 )
+endif()
+
 add_subdirectory(${BORINGSSL_ROOT_DIR} third_party/boringssl)
+set(protobuf_MSVC_STATIC_RUNTIME OFF CACHE BOOL "Link static runtime libraries")
 add_subdirectory(${PROTOBUF_ROOT_DIR}/cmake third_party/protobuf)
 add_subdirectory(${ZLIB_ROOT_DIR} third_party/zlib)
 
-set(CMAKE_C_FLAGS   "${CMAKE_C_FLAGS}   -std=c11")
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+if(NOT MSVC)
+  set(CMAKE_C_FLAGS   "${CMAKE_C_FLAGS}   -std=c11")
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+endif()
 
   
 add_library(gpr
@@ -1059,8 +1066,3 @@ target_link_libraries(grpc_ruby_plugin
   libprotoc
   grpc_plugin_support
 )
-
-
-
-
-
