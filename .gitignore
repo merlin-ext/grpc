@@ -4,6 +4,7 @@ bins
 gens
 libs
 objs
+_ReSharper.Caches/
 
 # Python items
 cython_debug/
