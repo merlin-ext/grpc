@@ -32,7 +32,7 @@
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 string(TOLOWER ${CMAKE_SYSTEM_NAME} cares_system_name)
-  if ("${cares_system_name}" MATCHES "android")
+if ("${cares_system_name}" MATCHES "android")
   # use linux config on android
   set(cares_system_name linux)
 endif ()
