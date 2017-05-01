@@ -53,9 +53,10 @@ file(GLOB lib_sources ../../third_party/cares/cares/*.c)
 add_library(cares ${lib_sources})
 
 if (gRPC_INSTALL)
+  if (NOT CMAKE_INSTALL_LIBDIR)
+    set(CMAKE_INSTALL_LIBDIR lib)
+  endif()
   install(TARGETS cares EXPORT gRPCTargets
-    RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
-    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
     ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
   )
 endif()
